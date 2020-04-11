@@ -2,9 +2,13 @@
 
 class Account:
     """ Users will be able to register and create an account. If they already
-    have an account saved then they can just login. """
+    have an account saved then they can just login.
+    Attributes:
+        create_user(str, int): users when creating accounts will create a username.
+        create_password(str, int): users when creating accounts will create a password.
+    """
     
-    def __init__(self):
+    def __init__(self, create_user, create_password):
         """Intializes the Account object"""
         
     def register(self, create_user, create_password, create_email,
@@ -25,23 +29,29 @@ class Account:
         Returns:
             str: Account information will be saved onto their account. At the 
             end, users will have something to login. 
-            
         Raises:
-            pass
+            TypeError: no spaces for writing phone numbers and login. Also phone
+            numbers need to be an integer. 
         """
     
-    def login(self, username_login, password_login):
+    def login(self, username_login, password_login, create_password,
+              create_username):
         """ Users will login to their already made accounts
         Args:
             username_login(str, int): users will insert their username for an
             already register account.
             password_login(str, int): users will insert their password for an 
             already register account.
+            create_username(str, int): users will insert username that they have
+            previously created. 
+            create_password(str, int): users will insert password that they have 
+            previously created.
         Returns:
             str: users will be able to access their saved accounts based on if
             they correctly login. 
         Raises:
-            pass
+            NotImplementError: created username and password need to match with
+            each other. 
         """
         
     def save_accountinfo(self, access_accountinfo, edit): 
@@ -50,26 +60,29 @@ class Account:
             access_accountinfo(str): users will either type yes or no to view
             their account information.
             edit(str): users will be able to redo the account information they
-            provided previously.
+            provided previously if they select yes to edit.
         Returns:
             list: users will see their account information if they selected yes 
             and if they selected no they will move forward with the program. 
         Raises:
-            pass
-            pass
+            ValueError: value needs to equal yes or no to the question.
         """
         
-    def edit_accountinfo(self, edit):
+    def edit_accountinfo(self, edit_yes, edit_no):
         """ Users will be able to edit and save changes on their account 
         information
         Args:
-            edit(str): users will either type yes or no to edit
-            their account information.
+            edit_yes(str): users will be able to redo the account information
+            they provided previously if user types yes.
+            edit_no(str): if user types no, they will continue on to the next
+            thing
         Returns:
             list: user will be able to go back to their account information to
             redo their account information. If the user says no, they will move
             onto picking the five programs of their choice. 
-        
+        Raises: 
+            TypeError: no spaces for writing phone numbers and login. Also phone
+            numbers need to be an integer. 
         """
     
     def intro_program(self, selection, one, two, three, four, five):
@@ -94,19 +107,16 @@ class Account:
         Returns:
             list: program will take them to a list of other selections that they
             can choose from.
+        Raises:
+            ValueError: Must select numbers, no strings, floats, or list
+            will be accepted into the search engine. 
         """
         
 class RecommendationSystem:
     """ Recommendation for selecting a specific category the user can view to
     find youtube channels to explore. They can select from a list of youtuber's 
     channel based on their specific category and view that channel top five
-    trending videos on Youtube. 
-    
-    Attributes:
-        pass
-        passs
-        pass
-    """
+    trending videos on Youtube. """
     
     def __init__(self):
         """Initializes the RecommendationSystem Object"""
@@ -165,7 +175,6 @@ class RecommendationSystem:
         Raises:
             ValueError: Must select numbers, no strings, floats, or list will be 
             accepted into the search engine. 
-
         """
         
     def comedy(self, comedy_tags, extract_videos, sorted_extract, selection):
@@ -277,7 +286,8 @@ class Popularvideos:
     def __init__(self):
         """Initialize the Popularvideos object"""
         
-    def prompt_channel_search(self):
+    def prompt_channel_search(self, extract_videos, videos_sorted,
+                              sorted_extract, add):
         """
         Args:
             extract_videos(list): extract the videos based on the channel name
@@ -287,14 +297,20 @@ class Popularvideos:
             sorted_extract(list): only show users the title of the video, 
             channel names, amount of views, amount of likes and dislikes on a
             video.
+            add(str, list): write exit to skip this step or write yes to go to
+            your bucketlist.
+        Returns:
+            list: list of channels you can explore. 
         """
         
 class Bucketlist:
-        
+        """area where you can write down youtube channels you
+        would want to delete or save"""
+    
     def __init__(self):
         """ Intialize the Bucketlist object"""
         
-    def add_list(self):
+    def add_list(self, selection, add_channel, add_video, exit):
         """ Ask users if they would like to add any of the channels or videos
         into the list. 
         Args:
@@ -304,14 +320,14 @@ class Bucketlist:
             want save onto their accounts.
             add_video(str): user will type in youtube video they would want
             saved. 
-            exist(str): users will type exit to start from the intro_program
+            exit(str): users will type exit to start from the intro_program
             function.  
         Returns: 
             list: users will see a list of youtube videos and channels they
             would want save onto their accounts for future reference. 
         """
         
-    def delete_item(self):
+    def delete_item(self, selection, yes, no):
         """
         Ask users if they would like to delete any of the channels or videos
         into the list.
@@ -325,58 +341,4 @@ class Bucketlist:
         Returns:
             list: items on the list will be deleted if users wants them to be
             deleted
-        Raises:
-            pass
-        """
-    
-class GeneralQuestions:
-    """ statistics on trending youtube videos to help new or existing creators
-    grow their channel."""
-    
-    def __init__(self):
-        """Initalize the GeneralQuesions object"""
-    
-    def user_selection(self):
-        """ Users will play a guessing game for each question to see the amount
-        of views and likes a trending video would need. 
-        Args:
-            selection(int): pick numbers 1-2 to choose which question you will
-            pick.
-            one(int): user type "1" to choose the first question.
-            two(int): user type "2" to choose the second question.
-        Returns:
-            int: will enter an integer to go to a certain function in the 
-            program. 
-        """
-    
-    def first_question(self):
-        """ users will guess the number of views that the average youtube 
-        trending video recieves"""
-        """
-        Args:
-            prompt(int): allow users to input a guess of the number
-            actual_num(int): show users the real number
-            views_extract(int)= extract views of the numbers of each
-            trending youtube video and take the mean of that number.
-        Returns:
-            int: will give the correct number of views of average trending
-            videos.
-        Raises:
-            pass
-        """
-        
-    def second_question(self):
-        """ users will guess the number of likes that the average youtube 
-        trending video recieves"""
-        """
-         Args:
-            prompt(int): allow users to input a guess of the number
-            actual_num(int): show users the real number
-            like_extract(int)= extract views of the numbers of each
-            trending youtube video and take the mean of that number.
-        Returns:
-            int: will give the correct number of like of average trending
-            videos.
-        Raises:
-            pass
         """
